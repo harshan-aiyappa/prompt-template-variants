@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+
+
+import Home from "./components/HomeScreen/HomeScreen"
+import ScreenOne from "./components/KimoTest/ScreenOne"
+import ScreenTwo from "./components/KimoTest/ScreenTwo"
+
+
+// Prompt Versions Components imports
+
+import Prompt_template_V1 from './components/Prompt-template-V1/Prompt_template_V1'
+import Prompt_template_V1_1 from "./components/Prompt-template-V1-1/Prompt_template_V1_1";
+import Prompt_template_V1_2 from "./components/Prompt-template-V1-2/Prompt_template_V1_2";
+import Prompt_template_V2 from './components/Prompt-template-V2/Prompt_template_V2';
+import Prompt_template_V2_1 from './components/Prompt-template-V2-1/Prompt_template_V2_1';
+import Prompt_template_V2_2 from  "./components/Prompt-template-V2-2/Prompt_template_V2_2";
+import Prompt_template_V3 from './components/Prompt-template-V3/Prompt_template_V3'
+
+import "./App.css"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route  path="/" element={<Home />} />
+          <Route exact path="Prompt_template_V1" element={<Prompt_template_V1 />} />
+          <Route exact path="Prompt_template_V1_1" element={<Prompt_template_V1_1 />} />
+          <Route exact path="Prompt_template_V1_2" element={<Prompt_template_V1_2 />} />
+          <Route exact path="Prompt_template_V2" element={<Prompt_template_V2 />} />
+          <Route exact path="Prompt_template_V2_1" element={<Prompt_template_V2_1 />} />
+          <Route exact path="Prompt_template_V2_2" element={<Prompt_template_V2_2 />} />
+          <Route exact path="Prompt_template_V3" element={<Prompt_template_V3 />} />
+        </Routes>
+
+        <div className="list">
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="Prompt_template_V1">P1</Link></li>
+            <li><Link to="Prompt_template_V1_1">P1.1</Link></li>
+            <li><Link to="Prompt_template_V1_2">P1.2</Link></li>
+            <li><Link to="Prompt_template_V2">P2</Link></li>
+            <li><Link to="Prompt_template_V2_1">P2.1</Link></li>
+            <li><Link to="Prompt_template_V3">P3</Link></li>
+           </ul>
+        </div>
+      </Router>
     </div>
   );
 }
