@@ -1,13 +1,12 @@
 /* hotfix */
 
-.prompt-v1-translation-container {
+.prompt-v1-1-translation-container {
   display: flex;
   flex-direction: row;
   gap: 0.5em;
 }
 
-
-.prompt-v1-translation-content {
+.prompt-v1-1-translation-content {
   font-size: var(--xlarge-font);
   font-weight: var(--large-fw);
   text-align: center;
@@ -17,15 +16,13 @@
   padding: 0em 0.2em;
 }
 
-
-
-.prompt-v1-prompt-container {
+.prompt-v1-1-prompt-container {
   display: flex;
   flex-direction: row;
   gap: 0.5em;
 }
 
-.prompt-v1-prompt-content {
+.prompt-v1-1-prompt-content {
   border-bottom: 2px solid var(--black);
   font-size: var(--xlarge-font);
   font-weight: var(--large-fw);

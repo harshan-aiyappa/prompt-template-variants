@@ -1,6 +1,7 @@
 import React from "react";
 
-import "./Prompt_template_V3.css";
+import "./Prompt_template_V4.css";
+import rightArrow from "../../assets/images/gray-arrow/right-arrow.png";
 import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 
 // Make sure to convert strings to array with split()
@@ -20,14 +21,22 @@ const objArr2 = {
   Prompt_Literal_Translation: "atrás ",
 };
 const objArr3 = {
-  Prompt: "we eat in _ is nos comemos",
-  Prompt_Literal: "we eat in _ is nos comemos",
-  Prompt_Answer: "Portuguese",
-  Prompt_Translation: "Portuguese",
-  Prompt_Literal_Translation: "Portuguese",
+  Prompt: "I can sing in is _",
+  Prompt_Literal: "I can sing in is _",
+  Prompt_Answer: "eu posso cantar",
+  Prompt_Translation: "eu posso cantar",
+  Prompt_Literal_Translation: "eu posso cantar",
 };
 
-const Prompt_template_V3 = () => {
+const objArr4 = {
+  Prompt: "eu fal_",
+  Prompt_Literal: "eu fal_",
+  Prompt_Answer: "o",
+  Prompt_Translation: "I speak",
+  Prompt_Literal_Translation: "I speak",
+};
+
+const Prompt_template_V4 = () => {
   const [data, setData] = React.useState([]);
   const dataFetchedRef = React.useRef(false);
 
@@ -39,7 +48,6 @@ const Prompt_template_V3 = () => {
       Prompt_Answer,
       Prompt_Translation,
       Prompt_Literal_Translation,
-      Prompt_Language,
     } = data;
 
     const resArr = [];
@@ -73,7 +81,7 @@ const Prompt_template_V3 = () => {
   }, []);
 
   const loadData = React.useCallback(() => {
-    let data = objArr;
+    let data = objArr3;
     setData(oneBigArr(data));
   }, []);
 
@@ -103,12 +111,12 @@ const Prompt_template_V3 = () => {
   return (
     <>
       <div className="prompt-banner-container">
-        <div className="prompt-v3-translation-container tracking-in-expand">
+        <div className="prompt-v4-translation-container tracking-in-expand">
           {data.map((item, index) => {
             const { isValue, isDash, isSuccess, isDefault } = item;
             return (
               <div
-                className={`prompt-v3-translation-content ${
+                className={`prompt-v4-translation-content ${
                   isDash
                     ? "shake-horizontal"
                     : isSuccess
@@ -141,21 +149,4 @@ const Prompt_template_V3 = () => {
   );
 };
 
-export default Prompt_template_V3;
-
-/**<div className="prompt-banner-container">
-        <div className="prompt-v3-translation-container tracking-in-expand">
-          <div
-            key={"isPromptTranslationPosition"}
-            className={`prompt-v3-translation-content `}
-          >
-            <span>{"isValue"}</span>
-          </div>
-        </div>
-
-        <div className="prompt-v3-prompt-container">
-          <div key={"isPromptPosition"} className={`prompt-v3-prompt-content`}>
-            <span style={{ visibility: "visible" }}>{"isPromptLiteral"}</span>
-          </div>
-        </div>
-      </div> */
+export default Prompt_template_V4;

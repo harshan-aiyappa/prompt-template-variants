@@ -1,26 +1,19 @@
 import React from "react";
 
-import "./Prompt_template_V1_1.css";
+import "../Prompt-template-V1/Prompt_template_V1.css";
 import rightArrow from "../../assets/images/gray-arrow/right-arrow.png";
 import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 
 // Make sure to convert strings to array with split()
 const objArr = {
-  Prompt: ["_", "_", "_"],
-  Prompt_Literal: ["_", "_", "_"],
-  Prompt_Answer: ["este", "homem", "piqueno"],
-  Prompt_Translation: ["this-0", "small-2", "man-1"],
-  Prompt_Literal_Translation: ["this", "man", "small"], // ignore this for functionalities [ No need positions here ]
+  Prompt: ["_", "_", "felizes."],
+  Prompt_Literal: ["_", "_", "felizes."],
+  Prompt_Answer: ["eles", "estao"],
+  Prompt_Translation: ["They-0", "are-1", "happy-2"],
+  Prompt_Literal_Translation: ["They", "are", "happy"], // ignore this for functionalities [ No need positions here ]
 };
 
-// SCENE 2 :
-// Prompt: ["_", "homem", "_"],
-// Prompt_Literal: ["_", "homem", "_"],
-// Prompt_Answer: ["este", "piqueno"],
-// Prompt_Translation: ["this-0", "small-2", "man-1"],
-// Prompt_Literal_Translation: ["this", "man", "small"],
-
-const Prompt_template_V1_1 = () => {
+const Prompt_template_V1_SC_1 = () => {
   const [data, setData] = React.useState({});
   const dataFetchedRef = React.useRef(false);
 
@@ -80,7 +73,7 @@ const Prompt_template_V1_1 = () => {
       }
     }
 
-    // console.log(PromptResArr)
+    console.log("PromptResArr :", PromptResArr);
 
     setCurrentPromptAnswer(Prompt_Answer[counter]);
     setPromptBigArr(PromptResArr);
@@ -89,8 +82,11 @@ const Prompt_template_V1_1 = () => {
   const PromptTranslationBigArrFunc = React.useCallback((data) => {
     const { Prompt_Translation, Prompt_Literal, Prompt } = data;
     let PromptNow;
-
-    PromptNow = Prompt;
+    if (Prompt_Literal.length > 0) {
+      PromptNow = Prompt_Literal;
+    } else {
+      PromptNow = Prompt;
+    }
 
     const indeces = [];
     const notIndeces = [];
@@ -253,10 +249,11 @@ const Prompt_template_V1_1 = () => {
           {promptBigArr.map((item) => {
             const {
               isDash,
+              isPromptLiteral,
               isPromptPosition,
               isDashAnswerValue,
-              isSuccess,
               isValue,
+              isSuccess,
             } = item;
 
             return (
@@ -289,9 +286,21 @@ const Prompt_template_V1_1 = () => {
       </div>
 
       <div className="btn-container">
+        <h3>
+          SCENE 1 : If its taken From
+          <i style={{ color: "var(--red)" }}> Prompt Translation</i>{" "}
+          <span style={{ color: "var(--green)" }}>
+            | {objArr.Prompt_Translation.join(" | ")} |
+          </span>
+        </h3>
         <button onClick={oneHandler}>ACTION</button>
       </div>
     </>
   );
 };
-export default Prompt_template_V1_1;
+
+export default Prompt_template_V1_SC_1;
+
+/* <Stack sx={{width:"100% !important"}}><Div>Kimosa</Div></Stack>
+ <prompt-v1></prompt-v1> 
+       <CustomContainer disableGutters={true}>  </CustomContainer>*/

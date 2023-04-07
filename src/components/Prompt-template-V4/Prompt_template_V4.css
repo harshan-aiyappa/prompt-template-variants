@@ -1,31 +1,25 @@
 /* hotfix */
 
-.prompt-v1-translation-container {
+.prompt-v4-translation-container {
   display: flex;
   flex-direction: row;
-  gap: 0.5em;
+  gap: 1em;
 }
 
-
-.prompt-v1-translation-content {
+.prompt-v4-translation-content {
+  border-bottom: 2px solid var(--black);
   font-size: var(--xlarge-font);
   font-weight: var(--large-fw);
   text-align: center;
-  border-radius: 0.3rem;
-  min-width: 2em;
-  min-height: 1.5em;
-  padding: 0em 0.2em;
 }
 
-
-
-.prompt-v1-prompt-container {
+.prompt-v4-prompt-container {
   display: flex;
   flex-direction: row;
-  gap: 0.5em;
+  gap: 0.2em;
 }
 
-.prompt-v1-prompt-content {
+.prompt-v4-prompt-content {
   border-bottom: 2px solid var(--black);
   font-size: var(--xlarge-font);
   font-weight: var(--large-fw);

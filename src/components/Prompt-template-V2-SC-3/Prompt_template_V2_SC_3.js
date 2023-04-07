@@ -1,15 +1,15 @@
 import React from "react";
-import "./Prompt_template_V2_1.css";
+import "../Prompt-template-V2/Prompt_template_V2.css";
 import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 
-const Prompt_template_V2_1 = () => {
+const Prompt_template_V2_SC_3 = () => {
   // Make sure to convert strings to array with split()
   const objArr = {
-    Prompt: ["_", "_", "e", "feliz"],
-    Prompt_Literal: ["_", "_", "e", "feliz"],
-    Prompt_Answer: ["este", "homem"],
-    Prompt_Translation: ["this-0", "man-1", "is-2", "happy-3"],
-    Prompt_Literal_Translation: ["this", "man", "is", "happy"],
+    Prompt: ["_", "homem", "_"],
+    Prompt_Literal: ["_", "homem", "_"],
+    Prompt_Answer: ["este", "piqueno"],
+    Prompt_Translation: ["this-0", "man-1", "small-2"],
+    Prompt_Literal_Translation: ["this", "man", "small"], // ignore this for functionalities [ No need positions here ]
   };
 
   // SCENE 1 :
@@ -66,11 +66,8 @@ const Prompt_template_V2_1 = () => {
     let PromptAnswerCnt = 0;
     let PromptResArr = [];
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
-      PromptNow = Prompt;
-    }
+
+    PromptNow = Prompt;
 
     for (let i = 0; i < Prompt.length; i++) {
       if (PromptNow[i] === "_") {
@@ -115,11 +112,8 @@ const Prompt_template_V2_1 = () => {
       Prompt_Literal_Translation,
     } = data;
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
-      PromptNow = Prompt;
-    }
+
+    PromptNow = Prompt;
 
     const indeces = [];
     const notIndeces = [];
@@ -206,7 +200,7 @@ const Prompt_template_V2_1 = () => {
 
       const promptTranslationNewState = promptNewState.map((obj) => {
         if (
-          obj.isPromptTranslationPosition ===
+          obj.isPromptTranslationLiteralPosition ===
           promptTranslationIndeces[promptTranslationCounter]
         ) {
           return {
@@ -215,7 +209,7 @@ const Prompt_template_V2_1 = () => {
             isPromptTranslationOrange: false,
           };
         } else if (
-          obj.isPromptTranslationPosition ===
+          obj.isPromptTranslationLiteralPosition ===
           promptTranslationIndeces[promptTranslationCounter + 1]
         ) {
           return {
@@ -255,18 +249,19 @@ const Prompt_template_V2_1 = () => {
             isPromptTranslationDefault,
             isPromptTranslationGray,
             isPromptTranslationOrange,
-            isPromptTranslationValue,
+            isPromptTranslationLiteralValue,
             isPromptValue,
             isSuccess,
+            isPromptTranslationValue
           } = item;
 
           return (
             <div
-              className="prompt-v2-1-container tracking-in-expand"
+              className="prompt-v2-container tracking-in-expand"
               key={isPromptPosition}
             >
               <div
-                className={`prompt-v2-1-prompt-content ${
+                className={`prompt-v2-prompt-content  ${
                   isDash ? " " : isSuccess ? "prompt-green" : "prompt-black"
                 }`}
               >
@@ -275,7 +270,7 @@ const Prompt_template_V2_1 = () => {
                 </span>
               </div>
               <div
-                className={`prompt-v2-1-translation-content   ${
+                className={`prompt-v2-translation-content  ${
                   isPromptTranslationOrange
                     ? "prompt-orange"
                     : isDash && isPromptTranslationDefault
@@ -300,9 +295,17 @@ const Prompt_template_V2_1 = () => {
         </span>
       </div>
       <div className="btn-container">
+        <h3>
+          SCENE 2 : If its taken From
+          <i style={{ color: "var(--red)" }}> Prompt Translation</i>{" "}
+          <span style={{ color: "var(--green)" }}>
+            | {objArr.Prompt_Translation.join(" | ")} |
+          </span>
+        </h3>
         <button onClick={oneHandler}>ACTION</button>
       </div>
     </>
   );
 };
-export default Prompt_template_V2_1;
+
+export default Prompt_template_V2_SC_3;

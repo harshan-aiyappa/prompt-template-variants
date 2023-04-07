@@ -1,15 +1,14 @@
 import React from "react";
-import "./Prompt_template_V2_1.css";
+import "../Prompt-template-V2/Prompt_template_V2.css";
 import greenTick from "../../assets/images/new-green-tick/Path 225.png";
-
-const Prompt_template_V2_1 = () => {
+const Prompt_template_SC_1 = () => {
   // Make sure to convert strings to array with split()
   const objArr = {
-    Prompt: ["_", "_", "e", "feliz"],
-    Prompt_Literal: ["_", "_", "e", "feliz"],
-    Prompt_Answer: ["este", "homem"],
-    Prompt_Translation: ["this-0", "man-1", "is-2", "happy-3"],
-    Prompt_Literal_Translation: ["this", "man", "is", "happy"],
+    Prompt: ["_", "homem", "_"],
+    Prompt_Literal: ["_", "homem", "_"],
+    Prompt_Answer: ["este", "piqueno"],
+    Prompt_Translation: ["this-0", "small-2", "man-1"],
+    Prompt_Literal_Translation: ["this", "man", "small"],
   };
 
   // SCENE 1 :
@@ -71,10 +70,10 @@ const Prompt_template_V2_1 = () => {
     } else {
       PromptNow = Prompt;
     }
-
     for (let i = 0; i < Prompt.length; i++) {
       if (PromptNow[i] === "_") {
         if (PromptAnswerCnt < PromptAnswerArrLen) {
+          console.log(Prompt_Answer[PromptAnswerCnt]);
           PromptResArr.push({
             isDash: true,
             isPromptValue: PromptNow[i],
@@ -91,7 +90,7 @@ const Prompt_template_V2_1 = () => {
         PromptResArr.push({
           isDash: false,
           isPromptValue: PromptNow[i],
-          isPromptLiteral: Prompt_Literal[i],
+          isPromptLiteral: Prompt_Literal[PromptAnswerCnt],
           isPromptPosition: i,
           isPromptTranslationLiteral: Prompt_Literal_Translation[i],
           isDashAnswerValue: "NOT AN ANSWER KIMO",
@@ -115,11 +114,8 @@ const Prompt_template_V2_1 = () => {
       Prompt_Literal_Translation,
     } = data;
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
-      PromptNow = Prompt;
-    }
+
+    PromptNow = Prompt;
 
     const indeces = [];
     const notIndeces = [];
@@ -262,11 +258,11 @@ const Prompt_template_V2_1 = () => {
 
           return (
             <div
-              className="prompt-v2-1-container tracking-in-expand"
+              className="prompt-v2-container tracking-in-expand"
               key={isPromptPosition}
             >
               <div
-                className={`prompt-v2-1-prompt-content ${
+                className={`prompt-v2-prompt-content ${
                   isDash ? " " : isSuccess ? "prompt-green" : "prompt-black"
                 }`}
               >
@@ -275,7 +271,7 @@ const Prompt_template_V2_1 = () => {
                 </span>
               </div>
               <div
-                className={`prompt-v2-1-translation-content   ${
+                className={`prompt-v2-translation-content  ${
                   isPromptTranslationOrange
                     ? "prompt-orange"
                     : isDash && isPromptTranslationDefault
@@ -300,9 +296,17 @@ const Prompt_template_V2_1 = () => {
         </span>
       </div>
       <div className="btn-container">
+        <h3>
+          SCENE 1 : If its taken From{" "}
+          <i style={{ color: "var(--red)" }}> Prompt Translation</i>{" "}
+          <span style={{ color: "var(--green)" }}>
+            | {objArr.Prompt_Translation.join(" | ")} |
+          </span>{" "}
+        </h3>
         <button onClick={oneHandler}>ACTION</button>
       </div>
     </>
   );
 };
-export default Prompt_template_V2_1;
+
+export default Prompt_template_SC_1;

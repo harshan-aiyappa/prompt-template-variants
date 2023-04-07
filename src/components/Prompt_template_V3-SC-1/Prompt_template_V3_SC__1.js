@@ -1,6 +1,7 @@
 import React from "react";
 
-import "./Prompt_template_V3.css";
+import "../Prompt-template-V3/Prompt_template_V3.css";
+import rightArrow from "../../assets/images/gray-arrow/right-arrow.png";
 import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 
 // Make sure to convert strings to array with split()
@@ -27,7 +28,7 @@ const objArr3 = {
   Prompt_Literal_Translation: "Portuguese",
 };
 
-const Prompt_template_V3 = () => {
+const Prompt_template_V3_SC__1 = () => {
   const [data, setData] = React.useState([]);
   const dataFetchedRef = React.useRef(false);
 
@@ -73,7 +74,7 @@ const Prompt_template_V3 = () => {
   }, []);
 
   const loadData = React.useCallback(() => {
-    let data = objArr;
+    let data = objArr2;
     setData(oneBigArr(data));
   }, []);
 
@@ -141,21 +142,4 @@ const Prompt_template_V3 = () => {
   );
 };
 
-export default Prompt_template_V3;
-
-/**<div className="prompt-banner-container">
-        <div className="prompt-v3-translation-container tracking-in-expand">
-          <div
-            key={"isPromptTranslationPosition"}
-            className={`prompt-v3-translation-content `}
-          >
-            <span>{"isValue"}</span>
-          </div>
-        </div>
-
-        <div className="prompt-v3-prompt-container">
-          <div key={"isPromptPosition"} className={`prompt-v3-prompt-content`}>
-            <span style={{ visibility: "visible" }}>{"isPromptLiteral"}</span>
-          </div>
-        </div>
-      </div> */
+export default Prompt_template_V3_SC__1;

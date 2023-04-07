@@ -1,0 +1,31 @@
+/* hotfix */
+
+.prompt-v2-1-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 0.5em;
+  padding: 0.3em 0em;
+}
+
+.prompt-v2-1-prompt-content {
+  border-bottom: 2px solid var(--black);
+  font-size: var(--xlarge-font);
+  font-weight: var(--large-fw);
+  text-align: center;
+  min-width: 2em;
+  min-height: 1.5em;
+  padding: 0em 0.2em;
+}
+
+.prompt-v2-1-translation-content {
+  font-size: var(--large-font);
+  font-weight: var(--large-fw);
+  text-align: center;
+  border-radius: 0.3rem;
+  min-width: 2em;
+  min-height: 2em;
+  padding: 0.2em 0.3em;
+}
