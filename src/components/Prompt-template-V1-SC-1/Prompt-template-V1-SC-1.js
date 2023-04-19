@@ -82,11 +82,8 @@ const Prompt_template_V1_SC_1 = () => {
   const PromptTranslationBigArrFunc = React.useCallback((data) => {
     const { Prompt_Translation, Prompt_Literal, Prompt } = data;
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
-      PromptNow = Prompt;
-    }
+
+    PromptNow = Prompt;
 
     const indeces = [];
     const notIndeces = [];

@@ -3,11 +3,9 @@
 .prompt-v4-translation-container {
   display: flex;
   flex-direction: row;
-  gap: 1em;
 }
 
 .prompt-v4-translation-content {
-  border-bottom: 2px solid var(--black);
   font-size: var(--xlarge-font);
   font-weight: var(--large-fw);
   text-align: center;
@@ -16,15 +14,22 @@
 .prompt-v4-prompt-container {
   display: flex;
   flex-direction: row;
-  gap: 0.2em;
+  gap: 0.5em;
 }
 
-.prompt-v4-prompt-content {
-  border-bottom: 2px solid var(--black);
+.prompt-v4-prompt-content-box {
   font-size: var(--xlarge-font);
   font-weight: var(--large-fw);
   text-align: center;
-  min-width: 2em;
-  min-height: 1.5em;
-  padding: 0em 0.2em;
+  display: flex;
+}
+
+.prompt-v4-prompt-content {
+  display: flex;
+  border-bottom: 3px solid white !important;
+}
+
+.prompt-v4-prompt-make-orange-dash {
+  display: flex !important;
+  border-bottom: 3px solid #ff8800 !important;
 }

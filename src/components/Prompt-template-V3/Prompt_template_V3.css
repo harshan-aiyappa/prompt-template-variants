@@ -3,7 +3,7 @@
 .prompt-v3-translation-container {
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  gap: 0.8em;
 }
 
 .prompt-v3-translation-content {

@@ -197,7 +197,7 @@ const Prompt_template_SC_2 = () => {
 
       const promptTranslationNewState = promptNewState.map((obj) => {
         if (
-          obj.isPromptTranslationLiteralPosition ===
+          obj.isPromptTranslationPosition ===
           promptTranslationIndeces[promptTranslationCounter]
         ) {
           return {
@@ -206,7 +206,7 @@ const Prompt_template_SC_2 = () => {
             isPromptTranslationOrange: false,
           };
         } else if (
-          obj.isPromptTranslationLiteralPosition ===
+          obj.isPromptTranslationPosition ===
           promptTranslationIndeces[promptTranslationCounter + 1]
         ) {
           return {
@@ -271,10 +271,10 @@ const Prompt_template_SC_2 = () => {
                   isPromptTranslationOrange
                     ? "prompt-orange"
                     : isDash && isPromptTranslationDefault
-                    ? "prompt-black"
+                    ? "prompt-blue-two"
                     : !isPromptTranslationDefault && isPromptTranslationGray
-                    ? "prompt-gray"
-                    : "prompt-black"
+                    ? "prompt-blue-two"
+                    : "prompt-blue-two"
                 }`}
               >
                 <span>{isPromptTranslationValue}</span>
@@ -294,10 +294,7 @@ const Prompt_template_SC_2 = () => {
       <div className="btn-container">
         <h3>
           SCENE 2 : If its taken From
-          <i style={{ color: "var(--red)" }}>
-            {" "}
-            Prompt Translation 
-          </i>{" "}
+          <i style={{ color: "var(--red)" }}> Prompt Translation</i>{" "}
           <span style={{ color: "var(--green)" }}>
             | {objArr.Prompt_Translation.join(" | ")} |
           </span>

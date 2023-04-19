@@ -200,7 +200,7 @@ const Prompt_template_V2_SC_3 = () => {
 
       const promptTranslationNewState = promptNewState.map((obj) => {
         if (
-          obj.isPromptTranslationLiteralPosition ===
+          obj.isPromptTranslationPosition ===
           promptTranslationIndeces[promptTranslationCounter]
         ) {
           return {
@@ -209,7 +209,7 @@ const Prompt_template_V2_SC_3 = () => {
             isPromptTranslationOrange: false,
           };
         } else if (
-          obj.isPromptTranslationLiteralPosition ===
+          obj.isPromptTranslationPosition ===
           promptTranslationIndeces[promptTranslationCounter + 1]
         ) {
           return {
@@ -252,7 +252,7 @@ const Prompt_template_V2_SC_3 = () => {
             isPromptTranslationLiteralValue,
             isPromptValue,
             isSuccess,
-            isPromptTranslationValue
+            isPromptTranslationValue,
           } = item;
 
           return (
@@ -274,10 +274,10 @@ const Prompt_template_V2_SC_3 = () => {
                   isPromptTranslationOrange
                     ? "prompt-orange"
                     : isDash && isPromptTranslationDefault
-                    ? "prompt-black"
+                    ? "prompt-blue-two"
                     : !isPromptTranslationDefault && isPromptTranslationGray
-                    ? "prompt-gray"
-                    : "prompt-black"
+                    ? "prompt-blue-two"
+                    : "prompt-blue-two"
                 }`}
               >
                 <span>{isPromptTranslationValue}</span>

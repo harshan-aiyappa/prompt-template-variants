@@ -112,39 +112,39 @@ function App() {
             <li>
               <Link to="Prompt_template_V1">P1</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="Prompt_template_V1_SC_1">P1 SCENE 1</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V1_1">P1.1</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V1_2">P1.2</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="Prompt_template_V2">P2</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="Prompt_template_V2_SC_1">P2 SCENE 1</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V2_SC_2">P2 SCENE 2</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V2_SC_3">P2 SCENE 3</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V2_1">P2.1</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V3">P3</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V3_SC_1">P3 SCENE 1</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="Prompt_template_V3_SC_2">P3 SCENE 2</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="Prompt_template_V4">P4</Link>
             </li>

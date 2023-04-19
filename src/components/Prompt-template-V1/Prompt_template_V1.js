@@ -7,10 +7,10 @@ import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 // Make sure to convert strings to array with split()
 const objArr = {
   Prompt: ["_", "_"],
-  Prompt_Literal: ["_", "_"],
+  Prompt_Literal: [""], // ignore this for functionalities
   Prompt_Answer: ["este", "homem"],
-  Prompt_Translation: ["this-0", "man-1"],
-  Prompt_Literal_Translation: ["this", "man"], // ignore this for functionalities [ No need positions here ]
+  Prompt_Translation: ["this", "man"],
+  Prompt_Literal_Translation: [""], // ignore this for functionalities [ No need positions here ]
   Prompt_Flag: "0",
 };
 
@@ -53,7 +53,9 @@ const Prompt_template_V1 = () => {
             isValue: PromptNow[i],
             isPromptLiteral: Prompt_Answer[PromptAnswerCnt],
             isPromptPosition: i,
-            isPromptTranslationLiteral: Prompt_Literal_Translation[i],
+            isPromptTranslationLiteral: Prompt_Literal_Translation[i]
+              ? Prompt_Literal_Translation[i]
+              : "",
             isDashAnswerValue: Prompt_Answer[PromptAnswerCnt],
             isSuccess: false,
             isDashNumber: PromptAnswerCnt,
@@ -66,7 +68,9 @@ const Prompt_template_V1 = () => {
           isValue: PromptNow[i],
           isPromptLiteral: Prompt_Literal[i],
           isPromptPosition: i,
-          isPromptTranslationLiteral: Prompt_Literal_Translation[i],
+          isPromptTranslationLiteral: Prompt_Literal_Translation[i]
+            ? Prompt_Literal_Translation[i]
+            : "",
           isDashAnswerValue: "NOT AN ANSWER KIMO",
           isSuccess: false,
           isDashNumber: "x",
@@ -74,7 +78,7 @@ const Prompt_template_V1 = () => {
       }
     }
 
-    console.log("PromptResArr :", PromptResArr);
+    //console.log("PromptResArr :", PromptResArr);
 
     setCurrentPromptAnswer(Prompt_Answer[counter]);
     setPromptBigArr(PromptResArr);
@@ -83,29 +87,27 @@ const Prompt_template_V1 = () => {
   const PromptTranslationBigArrFunc = React.useCallback((data) => {
     const { Prompt_Translation, Prompt_Literal, Prompt } = data;
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
-      PromptNow = Prompt;
-    }
+
+    PromptNow = Prompt;
 
     const indeces = [];
     const notIndeces = [];
-    for (const element in Prompt_Literal || Prompt) {
-      if (Prompt_Literal[element] === "_" || Prompt[element] === "_") {
+    for (const element in Prompt) {
+      if (Prompt[element] === "_") {
         indeces.push(+element);
       } else {
         notIndeces.push(+element);
       }
     }
-    console.log("indeces :", indeces);
+    //console.log("indeces :", indeces);
     setPromptTranslationIndeces(indeces);
     let indexCntr = 0;
     let notIndexCntr = 0;
 
     let PromptTranslationResArr = [];
     for (let i = 0; i < Prompt_Translation.length; i++) {
-      let [value, position] = Prompt_Translation[i].split("-");
+      // let [value, position] = Prompt_Translation[i].split("-");
+      let [value, position] = [Prompt_Translation[i], i];
       if (+position === indeces[indexCntr] && indexCntr === 0) {
         PromptTranslationResArr.push({
           isValue: value,
@@ -135,58 +137,58 @@ const Prompt_template_V1 = () => {
       }
     }
 
-    console.log(PromptTranslationResArr);
+    //console.log("PromptTranslationResArr :", PromptTranslationResArr);
     setPromptTranslationBigArr(PromptTranslationResArr);
   }, []);
 
   const oneHandler = () => {
-    if (currentPromptAnswer === data.Prompt_Answer[counter]) {
-      const promptNewState = promptBigArr.map((obj) => {
-        if (obj.isDashNumber === counter) {
-          return { ...obj, isSuccess: true, isDash: false };
+    const promptNewState = promptBigArr.map((obj) => {
+      if (obj.isDashNumber === counter) {
+        return { ...obj, isSuccess: true, isDash: false };
+      } else {
+        return { ...obj };
+      }
+    });
+    if (counter < data.Prompt_Answer.length) {
+      setPromptBigArr(promptNewState);
+      setCounter((counter) => counter + 1);
+      setCurrentPromptAnswer(data.Prompt_Answer[counter + 1]);
+      if (counter === data.Prompt_Answer.length - 1) {
+        setTimeout(() => {
+          setPromptShowTick(true);
+        }, 1000 * 0.4);
+      }
+    }
+
+    if (promptTranslationCounter < promptTranslationIndeces.length) {
+      const promptTranslationNewState = promptTranslationBigArr.map((obj) => {
+        if (
+          obj.isPromptTranslationPosition ===
+          promptTranslationIndeces[promptTranslationCounter]
+        ) {
+          return {
+            ...obj,
+            isPromptTranslationGray: true,
+            isPromptTranslationOrange: false,
+          };
+        } else if (
+          obj.isPromptTranslationPosition ===
+          promptTranslationIndeces[promptTranslationCounter + 1]
+        ) {
+          return {
+            ...obj,
+            isPromptTranslationGray: false,
+            isPromptTranslationOrange: true,
+            isPromptTranslationDefault: false,
+          };
         } else {
           return { ...obj };
         }
       });
-      if (counter < data.Prompt_Answer.length) {
-        setPromptBigArr(promptNewState);
-        setCounter((counter) => counter + 1);
-        setCurrentPromptAnswer(data.Prompt_Answer[counter + 1]);
-        if (counter === data.Prompt_Answer.length - 1) {
-          setPromptShowTick(true);
-        }
-      }
+      //console.log(promptTranslationNewState);
 
-      if (promptTranslationCounter < promptTranslationIndeces.length) {
-        const promptTranslationNewState = promptTranslationBigArr.map((obj) => {
-          if (
-            obj.isPromptTranslationPosition ===
-            promptTranslationIndeces[promptTranslationCounter]
-          ) {
-            return {
-              ...obj,
-              isPromptTranslationGray: true,
-              isPromptTranslationOrange: false,
-            };
-          } else if (
-            obj.isPromptTranslationPosition ===
-            promptTranslationIndeces[promptTranslationCounter + 1]
-          ) {
-            return {
-              ...obj,
-              isPromptTranslationGray: false,
-              isPromptTranslationOrange: true,
-              isPromptTranslationDefault: false,
-            };
-          } else {
-            return { ...obj };
-          }
-        });
-        console.log(promptTranslationNewState);
-
-        setPromptTranslationBigArr(promptTranslationNewState);
-        setPromptTranslationCounter((counter) => counter + 1);
-      }
+      setPromptTranslationBigArr(promptTranslationNewState);
+      setPromptTranslationCounter((counter) => counter + 1);
     }
   };
 
@@ -211,7 +213,7 @@ const Prompt_template_V1 = () => {
   return (
     <>
       <div className="prompt-banner-container">
-        <div className="prompt-v1-translation-container tracking-in-expand">
+        <div className="prompt-v1-translation-container tracking-in-expand scale-out-ver-bottom">
           {promptTranslationBigArr.map((item) => {
             const {
               isValue,
@@ -261,7 +263,7 @@ const Prompt_template_V1 = () => {
               <div
                 key={isPromptPosition}
                 className={`prompt-v1-prompt-content ${
-                  isDash ? " " : "prompt-green"
+                  isDash ? " " : "prompt-green text-focus-in"
                 }`}
               >
                 <span style={{ visibility: isDash ? "hidden" : "visible" }}>
@@ -281,7 +283,7 @@ const Prompt_template_V1 = () => {
             style={{ visibility: !promptShowTick ? "hidden" : "visible" }}
             src={greenTick}
             alt="prompt-tick"
-            className={`prompt-tick ${!promptShowTick ? "" : "bounce-in-top"} `}
+            className={`prompt-tick ${!promptShowTick ? "" : "fade-in"} `}
           />
         </span>
       </div>

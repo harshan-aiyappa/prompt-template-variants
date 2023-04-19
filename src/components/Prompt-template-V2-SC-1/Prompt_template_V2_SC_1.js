@@ -65,11 +65,9 @@ const Prompt_template_SC_1 = () => {
     let PromptAnswerCnt = 0;
     let PromptResArr = [];
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
+
       PromptNow = Prompt;
-    }
+   
     for (let i = 0; i < Prompt.length; i++) {
       if (PromptNow[i] === "_") {
         if (PromptAnswerCnt < PromptAnswerArrLen) {
@@ -275,10 +273,10 @@ const Prompt_template_SC_1 = () => {
                   isPromptTranslationOrange
                     ? "prompt-orange"
                     : isDash && isPromptTranslationDefault
-                    ? "prompt-black"
+                    ? "prompt-blue-two"
                     : !isPromptTranslationDefault && isPromptTranslationGray
-                    ? "prompt-gray"
-                    : "prompt-black"
+                    ? "prompt-blue-two"
+                    : "prompt-blue-two"
                 }`}
               >
                 <span>{isPromptTranslationValue}</span>

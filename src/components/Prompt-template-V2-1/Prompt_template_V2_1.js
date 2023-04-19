@@ -5,8 +5,8 @@ import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 const Prompt_template_V2_1 = () => {
   // Make sure to convert strings to array with split()
   const objArr = {
-    Prompt: ["_", "_", "e", "feliz"],
-    Prompt_Literal: ["_", "_", "e", "feliz"],
+    Prompt: ["_", "_", "ê", "feliz"],
+    Prompt_Literal: ["_", "_", "ê", "feliz"],
     Prompt_Answer: ["este", "homem"],
     Prompt_Translation: ["this-0", "man-1", "is-2", "happy-3"],
     Prompt_Literal_Translation: ["this", "man", "is", "happy"],
@@ -66,11 +66,8 @@ const Prompt_template_V2_1 = () => {
     let PromptAnswerCnt = 0;
     let PromptResArr = [];
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
-      PromptNow = Prompt;
-    }
+
+    PromptNow = Prompt;
 
     for (let i = 0; i < Prompt.length; i++) {
       if (PromptNow[i] === "_") {
@@ -115,11 +112,8 @@ const Prompt_template_V2_1 = () => {
       Prompt_Literal_Translation,
     } = data;
     let PromptNow;
-    if (Prompt_Literal.length > 0) {
-      PromptNow = Prompt_Literal;
-    } else {
-      PromptNow = Prompt;
-    }
+
+    PromptNow = Prompt;
 
     const indeces = [];
     const notIndeces = [];
