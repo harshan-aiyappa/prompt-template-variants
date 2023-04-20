@@ -170,7 +170,6 @@ a:hover {
   color: var(--gray) !important;
 }
 
-
 .prompt-right-arrow-container {
   /* border: 1px solid red; */
   position: relative;
@@ -625,7 +624,7 @@ a:hover {
 .fade-in {
   -webkit-animation: fade-in 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: fade-in 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-  animation-delay: 0.2s;
+  animation-delay: 0.4s;
 }
 
 @-webkit-keyframes fade-in {

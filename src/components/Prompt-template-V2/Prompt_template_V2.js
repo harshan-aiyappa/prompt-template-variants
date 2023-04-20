@@ -249,7 +249,7 @@ const Prompt_template_V2 = () => {
     loadData();
     setTimeout(() => {
       setScaleUp(true);
-    }, 2200);
+    }, 1000 * 2.2);
     return () => {
       console.log("clean up!");
     };
