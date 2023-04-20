@@ -278,8 +278,12 @@ const Prompt_template_V2 = () => {
             >
               {scaleUp && (
                 <div
-                  className={`prompt-v2-prompt-content fade-in ${
-                    isDash ? " " : isSuccess ? "prompt-green" : "prompt-black"
+                  className={`prompt-v2-prompt-content  ${
+                    isDash
+                      ? " "
+                      : isSuccess
+                      ? "prompt-green text-focus-in"
+                      : "prompt-black"
                   }`}
                 >
                   <span style={{ visibility: isDash ? "hidden" : "visible" }}>

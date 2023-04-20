@@ -223,7 +223,7 @@ const Prompt_template_V4 = () => {
                         index === indexer
                           ? showAnswer
                             ? "prompt-green text-focus-in"
-                            : "prompt-v4-prompt-make-orange-dash shake-horizontal"
+                            : "prompt-v4-prompt-make-orange-dash"
                           : ""
                       }`}
                     >
