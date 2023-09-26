@@ -20,6 +20,12 @@ import Prompt_template_V3 from "./components/Prompt-template-V3/Prompt_template_
 import Prompt_template_V3_SC_1 from "./components/Prompt_template_V3-SC-1/Prompt_template_V3_SC__1";
 import Prompt_template_V3_SC_2 from "./components/Prompt_template_V3-SC-2/Prompt_template_V3_SC_2";
 import Prompt_template_V4 from "./components/Prompt-template-V4/Prompt_template_V4";
+
+/* { For Testing ONLY } */
+
+import Test_P1_case from "./components/Test_P1_case/Test_P1_case";
+import Test_P2_case from "./components/Test_P2_case/Test_P2_case";
+
 import "./App.css";
 import React from "react";
 
@@ -102,6 +108,9 @@ function App() {
 
           <Route exact path="s1" element={<ScreenOne />} />
           <Route exact path="s2" element={<ScreenTwo />} />
+          {/* { For Testing ONLY } */}
+          <Route exact path="Test_P1_case" element={<Test_P1_case />} />
+          <Route exact path="Test_P2_case" element={<Test_P2_case />} />
         </Routes>
 
         <div className="list">
@@ -147,6 +156,13 @@ function App() {
             </li> */}
             <li>
               <Link to="Prompt_template_V4">P4</Link>
+            </li>
+            {/* { For Testing ONLY } */}
+            <li>
+              <Link to="Test_P1_case">Test_P1_case</Link>
+            </li>
+            <li>
+              <Link to="Test_P2_case">Test_P2_case</Link>
             </li>
           </ul>
         </div>

@@ -1,32 +1,40 @@
 import React from "react";
-
-import "./Prompt_template_V1.css";
-import rightArrow from "../../assets/images/gray-arrow/right-arrow.png";
+import "../Prompt-template-V2/Prompt_template_V2.css";
 import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 
-// Make sure to convert strings to array with split()
-const objArr = {
-  Prompt: ["_", "_"],
-  Prompt_Literal: [""], // ignore this for functionalities
-  Prompt_Answer: ["este", "homem"],
-  Prompt_Translation: ["this", "man"],
-  Prompt_Literal_Translation: [""], // ignore this for functionalities [ No need positions here ]
-  Prompt_Flag: "0",
-};
+const Test_P2_case = () => {
+  // Make sure to convert strings to array with split()
+  const objArr = {
+    Prompt: ["eu", "_", "_"],
+    Prompt_Literal: [""], // ignore this for functionalities
+    Prompt_Answer: ["quero", "falar"],
+    Prompt_Translation: ["They", "are", "happy"],
+    Prompt_Literal_Translation: [""], // ignore this for functionalities [ No need positions here ]
+  };
 
-// const objArr = {
-//   Prompt: ["eu", "_", "_", "haaki", "_", "haaki", "_"],
-//   Prompt_Literal: [""], // ignore this for functionalities
-//   Prompt_Answer: ["este", "homem", "hom", "car"],
-//   Prompt_Translation: ["i", "this", "man", "haaki", "hom", "that", "that"],
-//   Prompt_Literal_Translation: [""], // ignore this for functionalities [ No need positions here ]
-//   Prompt_Flag: "0",
-// };
+  // SCENE 1 :
+  //     Prompt: ["_", "_", "_"],
+  //     Prompt_Literal: ["_", "_", "_"],
+  //     Prompt_Answer: ["este", "homem", "piqueno"],
+  //     Prompt_Translation: ["this-0", "small-2", "man-1"],
+  //     Prompt_Literal_Translation: ["this", "man", "small"],
 
-const Prompt_template_V1 = () => {
+  // SCENE 2 :
+  // Prompt: ["_", "homem", "_"],
+  // Prompt_Literal: ["_", "homem", "_"],
+  // Prompt_Answer: ["este", "piqueno"],
+  // Prompt_Translation: ["this-0", "small-2", "man-1"],
+  // Prompt_Literal_Translation: ["this", "man", "small"],
+
+  // SCENE 3 :
+  //    Prompt: ["_", "_", "e", "feliz"],
+  //    Prompt_Literal: ["_", "_", "e", "feliz"],
+  //    Prompt_Answer: ["este", "homem"],
+  //    Prompt_Translation: ["this-0", "man-1", "is-2", "happy-3"],
+  //    Prompt_Literal_Translation: ["this", "man", "is", "happy"],
+
   const [data, setData] = React.useState({});
   const dataFetchedRef = React.useRef(false);
-
   const [currentPromptAnswer, setCurrentPromptAnswer] = React.useState("");
   const [counter, setCounter] = React.useState(0);
   const [promptBigArr, setPromptBigArr] = React.useState([]);
@@ -38,6 +46,13 @@ const Prompt_template_V1 = () => {
   const [promptTranslationCounter, setPromptTranslationCounter] =
     React.useState(0);
   const [promptShowTick, setPromptShowTick] = React.useState(false);
+  const [oneBigArrRes, setOneBigArrRes] = React.useState([]);
+
+  const loadData = React.useCallback(() => {
+    let data = objArr;
+    setData(data);
+    oneBigArr(PromptBigArrFunc(data), PromptTranslationBigArrFunc(data));
+  }, []);
 
   const PromptBigArrFunc = React.useCallback((data) => {
     const {
@@ -59,7 +74,7 @@ const Prompt_template_V1 = () => {
         if (PromptAnswerCnt < PromptAnswerArrLen) {
           PromptResArr.push({
             isDash: true,
-            isValue: PromptNow[i],
+            isPromptValue: PromptNow[i],
             isPromptLiteral: Prompt_Answer[PromptAnswerCnt],
             isPromptPosition: i,
             isPromptTranslationLiteral: Prompt_Literal_Translation[i]
@@ -74,8 +89,8 @@ const Prompt_template_V1 = () => {
       } else {
         PromptResArr.push({
           isDash: false,
-          isValue: PromptNow[i],
-          isPromptLiteral: Prompt_Literal[i],
+          isPromptValue: PromptNow[i],
+          isPromptLiteral: Prompt_Literal[i] ? Prompt_Literal[i] : "",
           isPromptPosition: i,
           isPromptTranslationLiteral: Prompt_Literal_Translation[i]
             ? Prompt_Literal_Translation[i]
@@ -87,14 +102,19 @@ const Prompt_template_V1 = () => {
       }
     }
 
-    //console.log("PromptResArr :", PromptResArr);
-
     setCurrentPromptAnswer(Prompt_Answer[counter]);
     setPromptBigArr(PromptResArr);
+
+    return PromptResArr;
   }, []);
 
   const PromptTranslationBigArrFunc = React.useCallback((data) => {
-    const { Prompt_Translation, Prompt_Literal, Prompt } = data;
+    const {
+      Prompt_Translation,
+      Prompt_Literal,
+      Prompt,
+      Prompt_Literal_Translation,
+    } = data;
     let PromptNow;
 
     PromptNow = Prompt;
@@ -117,49 +137,71 @@ const Prompt_template_V1 = () => {
     for (let i = 0; i < Prompt_Translation.length; i++) {
       // let [value, position] = Prompt_Translation[i].split("-");
       let [value, position] = [Prompt_Translation[i], i];
+
       if (+position === indeces[indexCntr] && indexCntr === 0) {
         PromptTranslationResArr.push({
-          isValue: value,
+          isPromptTranslationValue: value,
           isPromptTranslationOrange: true,
           isPromptTranslationPosition: +position,
           isPromptTranslationGray: false,
           isPromptTranslationDefault: false,
+          isPromptTranslationLiteralValue: Prompt_Literal_Translation[i]
+            ? Prompt_Literal_Translation[i]
+            : "",
+          isPromptTranslationLiteralPosition: +i,
         });
         indexCntr++;
       } else if (+position === notIndeces[notIndexCntr]) {
         PromptTranslationResArr.push({
-          isValue: value,
+          isPromptTranslationValue: value,
           isPromptTranslationOrange: false,
           isPromptTranslationPosition: +position,
           isPromptTranslationGray: false,
           isPromptTranslationDefault: false,
+          isPromptTranslationLiteralValue: Prompt_Literal_Translation[i]
+            ? Prompt_Literal_Translation[i]
+            : "",
+          isPromptTranslationLiteralPosition: +i,
         });
         notIndexCntr++;
       } else {
         PromptTranslationResArr.push({
-          isValue: value,
+          isPromptTranslationValue: value,
           isPromptTranslationOrange: false,
           isPromptTranslationPosition: +position,
           isPromptTranslationGray: false,
           isPromptTranslationDefault: true,
+          isPromptTranslationLiteralValue: Prompt_Literal_Translation[i]
+            ? Prompt_Literal_Translation[i]
+            : "",
+          isPromptTranslationLiteralPosition: +i,
         });
       }
     }
-
-    //console.log("PromptTranslationResArr :", PromptTranslationResArr);
-    setPromptTranslationBigArr(PromptTranslationResArr);
+    return PromptTranslationResArr;
   }, []);
 
+  const oneBigArr = React.useCallback((promptArr, promptTranslationArr) => {
+    const tempObj = [];
+    for (let i = 0; i < promptArr.length; i++) {
+      tempObj.push({ ...promptArr[i], ...promptTranslationArr[i] });
+    }
+
+    setOneBigArrRes(tempObj);
+  }, []);
+
+  //console.log("oneBigArrRes :", oneBigArrRes);
+
   const oneHandler = () => {
-    const promptNewState = promptBigArr.map((obj) => {
-      if (obj.isDashNumber === counter) {
-        return { ...obj, isSuccess: true, isDash: false };
-      } else {
-        return { ...obj };
-      }
-    });
     if (counter < data.Prompt_Answer.length) {
-      setPromptBigArr(promptNewState);
+      const promptNewState = oneBigArrRes.map((obj) => {
+        if (obj.isDashNumber === counter) {
+          return { ...obj, isSuccess: true, isDash: false };
+        } else {
+          return { ...obj };
+        }
+      });
+
       setCounter((counter) => counter + 1);
       setCurrentPromptAnswer(data.Prompt_Answer[counter + 1]);
       if (counter === data.Prompt_Answer.length - 1) {
@@ -167,10 +209,9 @@ const Prompt_template_V1 = () => {
           setPromptShowTick(true);
         }, 1000 * 0.4);
       }
-    }
+      setPromptTranslationCounter((counter) => counter + 1);
 
-    if (promptTranslationCounter < promptTranslationIndeces.length) {
-      const promptTranslationNewState = promptTranslationBigArr.map((obj) => {
+      const promptTranslationNewState = promptNewState.map((obj) => {
         if (
           obj.isPromptTranslationPosition ===
           promptTranslationIndeces[promptTranslationCounter]
@@ -194,26 +235,21 @@ const Prompt_template_V1 = () => {
           return { ...obj };
         }
       });
-      //console.log(promptTranslationNewState);
 
-      setPromptTranslationBigArr(promptTranslationNewState);
-      setPromptTranslationCounter((counter) => counter + 1);
+      setOneBigArrRes(promptTranslationNewState);
     }
   };
 
-  const loadData = React.useCallback(() => {
-    let data = objArr;
-    setData(data);
-    PromptBigArrFunc(data);
-    PromptTranslationBigArrFunc(data);
-  }, []);
+  const [scaleUp, setScaleUp] = React.useState(false);
 
   React.useEffect(() => {
     console.count("Times Mounted");
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
     loadData();
-
+    setTimeout(() => {
+      setScaleUp(true);
+    }, 1000 * 2.2);
     return () => {
       console.log("clean up!");
     };
@@ -222,71 +258,57 @@ const Prompt_template_V1 = () => {
   return (
     <>
       <div className="prompt-banner-container">
-        <div className="prompt-v1-translation-container tracking-in-expand scale-out-ver-bottom">
-          {promptTranslationBigArr.map((item) => {
-            const {
-              isValue,
-              isPromptTranslationOrange,
-              isPromptTranslationPosition,
-              isPromptTranslationGray,
-              isPromptTranslationDefault,
-              isDash,
-            } = item;
-            return (
+        {oneBigArrRes.map((item) => {
+          const {
+            isDash,
+            isDashAnswerValue,
+            isPromptPosition,
+            isPromptTranslationDefault,
+            isPromptTranslationGray,
+            isPromptTranslationOrange,
+            isPromptTranslationValue,
+            isPromptValue,
+            isSuccess,
+          } = item;
+
+          return (
+            <div
+              className={`prompt-v2-container   ${scaleUp ? "" : "kimo"}`}
+              key={isPromptPosition}
+            >
+              {scaleUp && (
+                <div
+                  className={`prompt-v2-prompt-content  ${
+                    isDash
+                      ? " "
+                      : isSuccess
+                      ? "prompt-green text-focus-in"
+                      : "prompt-black"
+                  }`}
+                >
+                  <span style={{ visibility: isDash ? "hidden" : "visible" }}>
+                    {isPromptValue === "_" ? isDashAnswerValue : isPromptValue}
+                  </span>
+                </div>
+              )}
               <div
-                key={isPromptTranslationPosition}
-                className={`prompt-v1-translation-content   ${
+                className={`prompt-v2-translation-content  ${
                   isPromptTranslationOrange
-                    ? "prompt-orange"
+                    ? scaleUp
+                      ? "prompt-orange"
+                      : ""
                     : isDash && isPromptTranslationDefault
-                    ? "prompt-black"
+                    ? "prompt-blue-two"
                     : !isPromptTranslationDefault && isPromptTranslationGray
-                    ? "prompt-gray"
-                    : "prompt-black"
+                    ? "prompt-blue-two"
+                    : "prompt-blue-two"
                 }`}
               >
-                <span>{isValue}</span>
+                <span>{isPromptTranslationValue}</span>
               </div>
-            );
-          })}
-        </div>
-        <div className="prompt-right-arrow-container">
-          <img
-            src={rightArrow}
-            alt="banner"
-            className="prompt-right-arrow slit-in-vertical"
-          />
-        </div>
-        <div className="prompt-v1-prompt-container">
-          {promptBigArr.map((item) => {
-            const {
-              isDash,
-              isPromptLiteral,
-              isPromptPosition,
-              isDashAnswerValue,
-              isSuccess,
-              isValue,
-            } = item;
-
-            return (
-              <div
-                key={isPromptPosition}
-                className={`prompt-v1-prompt-content ${
-                  isDash ? " " : "prompt-green text-focus-in"
-                }`}
-              >
-                <span style={{ visibility: isDash ? "hidden" : "visible" }}>
-                  {isDash && !isSuccess
-                    ? isDashAnswerValue
-                    : isSuccess
-                    ? isDashAnswerValue
-                    : isValue}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-
+            </div>
+          );
+        })}
         <span className="prompt-tick-container">
           <img
             style={{ visibility: !promptShowTick ? "hidden" : "visible" }}
@@ -298,14 +320,9 @@ const Prompt_template_V1 = () => {
       </div>
 
       <div className="btn-container">
-        <button onClick={() => oneHandler()}>ACTION</button>
+        <button onClick={oneHandler}>ACTION</button>
       </div>
     </>
   );
 };
-
-export default Prompt_template_V1;
-
-/* <Stack sx={{width:"100% !important"}}><Div>Kimosa</Div></Stack>
- <prompt-v1></prompt-v1> 
-       <CustomContainer disableGutters={true}>  </CustomContainer>*/
+export default Test_P2_case;

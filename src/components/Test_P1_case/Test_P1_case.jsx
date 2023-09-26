@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Prompt_template_V1.css";
+import "../Prompt-template-V1/Prompt_template_V1.css";
 import rightArrow from "../../assets/images/gray-arrow/right-arrow.png";
 import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 
@@ -8,8 +8,8 @@ import greenTick from "../../assets/images/new-green-tick/Path 225.png";
 const objArr = {
   Prompt: ["_", "_"],
   Prompt_Literal: [""], // ignore this for functionalities
-  Prompt_Answer: ["este", "homem"],
-  Prompt_Translation: ["this", "man"],
+  Prompt_Answer: ["o", "carro"],
+  Prompt_Translation: ["The", "car"],
   Prompt_Literal_Translation: [""], // ignore this for functionalities [ No need positions here ]
   Prompt_Flag: "0",
 };
@@ -23,7 +23,7 @@ const objArr = {
 //   Prompt_Flag: "0",
 // };
 
-const Prompt_template_V1 = () => {
+const Test_P1_case = () => {
   const [data, setData] = React.useState({});
   const dataFetchedRef = React.useRef(false);
 
@@ -146,7 +146,6 @@ const Prompt_template_V1 = () => {
       }
     }
 
-    //console.log("PromptTranslationResArr :", PromptTranslationResArr);
     setPromptTranslationBigArr(PromptTranslationResArr);
   }, []);
 
@@ -304,7 +303,7 @@ const Prompt_template_V1 = () => {
   );
 };
 
-export default Prompt_template_V1;
+export default Test_P1_case;
 
 /* <Stack sx={{width:"100% !important"}}><Div>Kimosa</Div></Stack>
  <prompt-v1></prompt-v1> 
