@@ -20,6 +20,7 @@ import Prompt_template_V3 from "./components/Prompt-template-V3/Prompt_template_
 import Prompt_template_V3_SC_1 from "./components/Prompt_template_V3-SC-1/Prompt_template_V3_SC__1";
 import Prompt_template_V3_SC_2 from "./components/Prompt_template_V3-SC-2/Prompt_template_V3_SC_2";
 import Prompt_template_V4 from "./components/Prompt-template-V4/Prompt_template_V4";
+import Prompt_template_V7 from "./components/Prompt-template-V7/Prompt_template_V7";
 
 /* { For Testing ONLY } */
 
@@ -105,6 +106,11 @@ function App() {
             path="Prompt_template_V4"
             element={<Prompt_template_V4 />}
           />
+          <Route
+            exact
+            path="Prompt_template_V7"
+            element={<Prompt_template_V7 />}
+          />
 
           <Route exact path="s1" element={<ScreenOne />} />
           <Route exact path="s2" element={<ScreenTwo />} />
@@ -158,11 +164,14 @@ function App() {
               <Link to="Prompt_template_V4">P4</Link>
             </li>
             {/* { For Testing ONLY } */}
-            <li>
+            {/* <li>
               <Link to="Test_P1_case">Test_P1_case</Link>
             </li>
             <li>
               <Link to="Test_P2_case">Test_P2_case</Link>
+            </li> */}
+            <li>
+              <Link to="Prompt_template_V7">P7</Link>
             </li>
           </ul>
         </div>
