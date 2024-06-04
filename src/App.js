@@ -26,6 +26,7 @@ import Prompt_template_V7 from "./components/Prompt-template-V7/Prompt_template_
 
 import Test_P1_case from "./components/Test_P1_case/Test_P1_case";
 import Test_P2_case from "./components/Test_P2_case/Test_P2_case";
+import Test_Inversion_case from "./components/PromptInversion/Prompt-template-V1/Prompt_template_V1";
 
 import "./App.css";
 import React from "react";
@@ -117,7 +118,7 @@ function App() {
           {/* { For Testing ONLY } */}
           <Route exact path="Test_P1_case" element={<Test_P1_case />} />
           <Route exact path="Test_P2_case" element={<Test_P2_case />} />
-        </Routes>
+          <Route exact path="Test_Inversion" element={<Test_Inversion_case />} /> </Routes>
 
         <div className="list">
           <ul>
@@ -172,6 +173,9 @@ function App() {
             </li> */}
             <li>
               <Link to="Prompt_template_V7">P7</Link>
+            </li>
+            <li>
+              <Link to="Test_Inversion">Inversion</Link>
             </li>
           </ul>
         </div>
